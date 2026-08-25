@@ -8,7 +8,6 @@ Job seekers manually log applications in spreadsheets or worse, keep everything 
 
 A web app that connects to a user's Gmail, automatically detects and classifies job-application-related emails, and maintains a timeline per application with intelligent, context-aware classification.
 
-
 ---
 
 ## Tech Stack
@@ -38,13 +37,13 @@ A web app that connects to a user's Gmail, automatically detects and classifies 
 
 ```
 ApplySense/
-├── frontend/           # Next.js web application
+├── backend/             # Next.js web application
 │   └── ...
-├── backend/            # FastAPI backend service
+├── frontend/            # FastAPI backend service
 │   └── ...
 ├── .gitignore
 ├── LICENSE
-└── README.md           # This file
+└── README.md            # This file
 ```
 
 ---
@@ -62,7 +61,7 @@ ApplySense/
 ### Frontend
 
 ```bash
-cd Frontend
+cd frontend
 npm install
 npm run dev
 # Runs on http://localhost:3000
@@ -71,9 +70,9 @@ npm run dev
 ### Backend
 
 ```bash
-cd Backend
+cd backend
 python -m venv venv
-venv\Scripts\activate   #On Linux/Mac: source venv/bin/activate
+venv\Scripts\activate   #On Linux/Mac: source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 # Runs on http://localhost:8000

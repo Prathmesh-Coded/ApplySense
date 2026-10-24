@@ -1,85 +1,72 @@
 # ApplySense
 
-## Problem
+ApplySense is a self-hosted job application tracker. It helps you keep application details and status changes together, with Gmail-based tracking planned for a later phase. Your data stays in the Supabase project you configure.
 
-Job seekers manually log applications in spreadsheets or worse, keep everything in their head, while status updates (interviews, rejections, onboarding invites) arrive via email and are easy to miss or forget to log — including company-specific emails like pre-onboarding session invites that don't follow standard "interview/rejected" wording.
+## Stack
 
-## Solution
+- Frontend: Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui
+- Backend: FastAPI, Python, Supabase Python client
+- Database and authentication: Supabase Auth and Postgres with row-level security
 
-A web app that connects to a user's Gmail, automatically detects and classifies job-application-related emails, and maintains a timeline per application with intelligent, context-aware classification.
+## Requirements
 
----
+- Node.js 20 or later
+- Python 3.11 or later
+- A Supabase project with `backend/migrations/initial_schema.sql` applied
 
-## Tech Stack
+## Configure Supabase
 
-### Frontend
+In the Supabase dashboard, enable email authentication and set the Auth site URL to `http://localhost:3000` for local development. Copy the project URL and publishable key for the frontend. The backend also needs the project's secret key and JWT signing secret; find the latter in the project's JWT settings. Never expose the secret key or JWT secret to the frontend or commit them.
 
-- **Framework**: Next.js 16+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Deployment**: Vercel
+Copy `frontend/.env.example` to `frontend/.env.local` and fill in the values:
 
-### Backend
-
-- **Framework**: FastAPI / Python
-- **Key Libraries**: Gmail API client, LLM integration (Groq/Gemini)
-- **Deployment**: Railway / Render
-
-### Infrastructure
-
-- **Database**: Supabase
-- **Authentication**: OAuth2 (Gmail)
-- **LLM**: Groq / Google Gemini
-
----
-
-## Repository Structure
-
-```
-ApplySense/
-├── backend/             # Next.js web application
-│   └── ...
-├── frontend/            # FastAPI backend service
-│   └── ...
-├── .gitignore
-├── LICENSE
-└── README.md            # This file
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
----
+Copy `backend/.env.example` to `backend/.env` and fill in the values:
 
-## Getting Started (Development)
+```dotenv
+SUPABASE_URL=
+SUPABASE_SECRET_KEY=
+SUPABASE_JWT_SECRET=
+FRONTEND_URL=http://localhost:3000
+```
 
-### Prerequisites
+The frontend and backend `.gitignore` files exclude local env files.
 
-- Node.js 24+ (frontend)
-- Python 3.14+ (backend)
-- PostgreSQL (local or Supabase)
-- Gmail API credentials (OAuth2 setup)
-- Groq / Gemini API key
+## Run locally
 
-### Frontend
+Install frontend dependencies and start Next.js:
 
 ```bash
 cd frontend
 npm install
 npm run dev
-# Runs on http://localhost:3000
 ```
 
-### Backend
+In another terminal, install backend dependencies and start FastAPI:
 
 ```bash
 cd backend
-python -m venv venv
-venv\Scripts\activate   #On Linux/Mac: source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload
-# Runs on http://localhost:8000
+python -m venv .venv
 ```
 
----
+Activate the environment with `.venv\Scripts\activate` on Windows or `source .venv/bin/activate` on macOS/Linux, then run:
+
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Open [http://localhost:3000](http://localhost:3000), create an account, and add applications. The API health endpoint is available at [http://localhost:8000/health](http://localhost:8000/health).
+
+## Current scope
+
+Applications can be created, listed, edited, and deleted. Gmail connection, email classification, timeline events, and reminders are planned for later implementation phases.
 
 ## License
 
-See [LICENSE](./LICENSE) for details.
+ApplySense is licensed under the MIT License. See [LICENSE](./LICENSE).

@@ -1,3 +1,5 @@
+import { ApplicationsDashboard } from "@/components/applications-dashboard";
+
 export default function Home() {
-  return (<h1>ApplySense</h1>);
+  return <ApplicationsDashboard />;
 }

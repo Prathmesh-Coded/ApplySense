@@ -5,17 +5,17 @@ import { cn } from "@/lib/utils";
 
 const montserratHeading = Montserrat({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-montserrat",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
   title: "ApplySense",
-  description: "AI powered job application tracker",
+  description: "Track your job applications and follow each opportunity.",
 };
 
 export default function RootLayout({

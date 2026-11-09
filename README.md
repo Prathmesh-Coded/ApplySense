@@ -16,7 +16,7 @@ ApplySense is a self-hosted job application tracker. It helps you keep applicati
 
 ## Configure Supabase
 
-In the Supabase dashboard, enable email authentication and set the Auth site URL to `http://localhost:3000` for local development. Copy the project URL and publishable key for the frontend. The backend also needs the project's secret key and JWT signing secret; find the latter in the project's JWT settings. Never expose the secret key or JWT secret to the frontend or commit them.
+In the Supabase dashboard, enable email authentication and set the Auth site URL to `http://localhost:3000` for local development. Copy the project URL and publishable key for the frontend. The backend needs the project's secret key. For projects using the legacy HS256 JWT signing key, set `SUPABASE_JWT_SECRET`; for asymmetric signing keys, the backend verifies with Supabase's JWKS endpoint (derived from the project URL, or set `SUPABASE_JWKS_URL`). Never expose the secret key or JWT secret to the frontend or commit them.
 
 Copy `frontend/.env.example` to `frontend/.env.local` and fill in the values:
 
@@ -35,7 +35,7 @@ SUPABASE_JWT_SECRET=
 FRONTEND_URL=http://localhost:3000
 ```
 
-The frontend and backend `.gitignore` files exclude local env files.
+The root `.gitignore` excludes local env files, virtual environments, and generated dependencies. The frontend also has its own `.gitignore`.
 
 ## Run locally
 

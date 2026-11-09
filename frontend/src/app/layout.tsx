@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Manrope, Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -8,9 +8,9 @@ const montserratHeading = Montserrat({
   variable: "--font-montserrat",
 });
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "h-full antialiased font-sans",
-        inter.variable,
+        manrope.variable,
         montserratHeading.variable,
       )}
     >
